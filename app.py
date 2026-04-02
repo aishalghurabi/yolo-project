@@ -15,7 +15,17 @@ def run_prediction():
 
     file = request.files["image"]
 
-    filepath = os.path.join("input.jpg")
+    filepath = "input.jpg"
     file.save(filepath)
 
     output_path = predict(filepath)
+
+    return jsonify({
+        "result_image": output_path
+    })
+
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port)
